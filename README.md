@@ -1,6 +1,6 @@
 # InviChat - Automated Inventory Management Bot
 
-[whatsapp-channel-.width-1200.format-webp.webpquality-75.webp](InviChat%20-%20Automated%20Inventory%20Management%20Bot%20a02fc135a3d54fc49460df26197d8172/whatsapp-channel-.width-1200.format-webp.webpquality-75.webp)
+[whatsapp-channel-.width-1200.format-webp.webpquality-75.webp](InviChat%20-%20Automated%20Inventory%20Management%20Bot%20a02fc135a3d54fc49460df26197d8172/image.png)
 
 **Note before starting:**
 
@@ -8,7 +8,7 @@ The problem i tried to solve here might not be a common problem around the globe
 
 ## The Problem:
 
-In India, there are as high as 7 Million (official) and 200 Million (un-official) artisans. But when we compare that number to the number of artisans that are available/selling on e-commerce the number is no where close or it is negligible. 
+In India, there are as high as 7 Million (official) and 200 Million (un-official) artisans. But when we compare that number to the number of artisans that are available/selling on e-commerce the number is no where close or it is negligible.
 
 proof:
 
@@ -32,9 +32,9 @@ So the workflow now is user has to register themselves on the platform with thei
 
 1. The user is authenticated every time we detect an active session from the user. (Future work)
 2. we request user to enter their registered mobile number and push OTP to the number entered after verifying the mobile number exists. (Future work)
-3. After auth, the user is asked a few basic questions about the product (these are the product details) like product name, product description, price, No of images user has of the product, images of the product. 
-4. we keep creating an object of all the details of the product as we keep enquiring about the product in the form of chat.  
-5. And finally store all the product details in a No-sql database and images in a storage bucket in some cloud platform and store the external links to the same in the No-Sql database. 
+3. After auth, the user is asked a few basic questions about the product (these are the product details) like product name, product description, price, No of images user has of the product, images of the product.
+4. we keep creating an object of all the details of the product as we keep enquiring about the product in the form of chat.
+5. And finally store all the product details in a No-sql database and images in a storage bucket in some cloud platform and store the external links to the same in the No-Sql database.
 6. And later we query the database for all the products using a separate server and project it on the website.
 
 ### Flow of the bot:
@@ -43,12 +43,12 @@ So the workflow now is user has to register themselves on the platform with thei
 
 So in this way we can automate the product card creation on the website using what’s app chat. The same procedure can be followed to update, delete and read products through what’s app which gives them a whole new interface to operate from without knowing anything about the e-commerce platform and still get profits from it.
 
-Pictures of the bot: 
+Pictures of the bot:
 
 ![Screenshot 2022-06-04 at 2.28.10 PM.png](InviChat%20-%20Automated%20Inventory%20Management%20Bot%20a02fc135a3d54fc49460df26197d8172/Screenshot_2022-06-04_at_2.28.10_PM.png)
 
 ![Screenshot 2022-06-04 at 2.28.22 PM.png](InviChat%20-%20Automated%20Inventory%20Management%20Bot%20a02fc135a3d54fc49460df26197d8172/Screenshot_2022-06-04_at_2.28.22_PM.png)
 
-Demo video: 
+Demo video:
 
 [please click here to watch the demo](https://drive.google.com/file/d/1nSuoiog_uaUAoRycibOj8D9NBP1ZM22b/view?usp=sharing)
