@@ -1,6 +1,6 @@
 # InviChat - Automated Inventory Management Bot
 
-[whatsapp-channel-.width-1200.format-webp.webpquality-75.webp](InviChat%20-%20Automated%20Inventory%20Management%20Bot%20a02fc135a3d54fc49460df26197d8172/image.png)
+![cover-image.png](InviChat%20-%20Automated%20Inventory%20Management%20Bot%20a02fc135a3d54fc49460df26197d8172/image.png)
 
 **Note before starting:**
 
