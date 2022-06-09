@@ -4,14 +4,18 @@ if (typeof localStorage === "undefined" || localStorage === null) {
   var LocalStorage = require("node-localstorage").LocalStorage;
   localStorage = new LocalStorage("./localStorage");
 }
-
+const greetUserBeforeAuth = require("../BotHandlingMethods/greetUserBeforeAuth");
+const {
+  getHelpMessageAfterAuth,
+  NotVerifiedMessage,
+} = require("../BotHandlingMethods/greetUserAfterAuth");
 const product = require("../Models/productModel");
-
+const AuthenticateUser = require("./AuthenticateUser.js");
 //help message for the user
 
 async function handleWhatsAppMessages(requestBody, response) {
   var question = [];
-
+  var operation;
   response.writeHead(200, { "Content-Type": "text/xml" });
 
   //split the request body with delimiter as space
@@ -25,18 +29,31 @@ async function handleWhatsAppMessages(requestBody, response) {
         requestBodyMsg[i].toLowerCase()
       )
     ) {
-      var message = getHelpMessage(requestBody.ProfileName);
+      var message = greetUserBeforeAuth(requestBody.ProfileName);
       return [message];
     }
   }
 
+  // check if the user is authenticated
+  if (requestBodyMsg[0] === "verifyme") {
+    // check if the user is already in the database
+    const Auth = await AuthenticateUser(requestBody.From);
+    console.log("status" + Auth);
+    if (Auth) {
+      // if the user is already in the database
+      var message = getHelpMessageAfterAuth(requestBody.ProfileName);
+      return [message];
+    } else {
+      return [NotVerifiedMessage(requestBody.ProfileName)];
+    }
+  }
   //initializing the sms count to find out which state of the form the user is in
   var getUserObjectIfThereAlready = await logs.findOne({
     userName: requestBody.ProfileName,
   });
 
   if (getUserObjectIfThereAlready) {
-    var operation = getUserObjectIfThereAlready.Operation;
+    operation = getUserObjectIfThereAlready.Operation;
   }
 
   //check if the request body is create

@@ -6,7 +6,7 @@ const bodyParser = require("body-parser");
 const Twilio = require("twilio");
 const connectDatabase = require("./config/DbConnection");
 const logModel = require("./Models/logs");
-const handleWhatsAppMessages = require("./Helper Functions/handleWhatsAppMessages");
+const handleWhatsAppMessages = require("./BotHandlingMethods/handleWhatsAppMessages");
 if (typeof localStorage === "undefined" || localStorage === null) {
   var LocalStorage = require("node-localstorage").LocalStorage;
   localStorage = new LocalStorage("./localStorage");
@@ -54,7 +54,6 @@ app.post("/", async (request, response) => {
   var answerObject = JSON.parse(localStorage.getItem("dataCollectionObject"));
   if (findUser) {
     if (findUser.Operation === "create") {
-      console.log("tally question status" + findUser.QuestionStatus);
       if (findUser.QuestionStatus === 2) {
         answerObject.productName = request.body.Body;
       } else if (findUser.QuestionStatus === 3) {
