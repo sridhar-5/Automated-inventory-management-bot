@@ -11,6 +11,9 @@ const {
 } = require("../BotHandlingMethods/greetUserAfterAuth");
 const product = require("../Models/productModel");
 const AuthenticateUser = require("./AuthenticateUser.js");
+const sessionModel = require("../Models/sessionAuth");
+const CheckVerificationStatusOfUser = require("./checkUserVerificationStatus.js");
+const UnAuthorizedOperationMessage = require("./UnAuthorizedOperationMessage.js");
 //help message for the user
 
 async function handleWhatsAppMessages(requestBody, response) {
@@ -38,12 +41,23 @@ async function handleWhatsAppMessages(requestBody, response) {
   if (requestBodyMsg[0] === "verifyme") {
     // check if the user is already in the database
     const Auth = await AuthenticateUser(requestBody.From);
-    console.log("status" + Auth);
+
     if (Auth) {
       // if the user is already in the database
       var message = getHelpMessageAfterAuth(requestBody.ProfileName);
+      //create a new log with entry of auth user
+      await new sessionModel({
+        userName: requestBody.ProfileName,
+        verificationStatus: true,
+      }).save();
       return [message];
     } else {
+      // if the user is not in the database save a session log with verification status false
+      await new sessionModel({
+        userName: requestBody.ProfileName,
+        verificationStatus: false,
+      }).save();
+
       return [NotVerifiedMessage(requestBody.ProfileName)];
     }
   }
@@ -59,6 +73,10 @@ async function handleWhatsAppMessages(requestBody, response) {
   //check if the request body is create
   if (requestBodyMsg[0] === "/create" || operation === "create") {
     //save the operation name in the database
+    //check the verification status of the user
+    if (!CheckVerificationStatusOfUser(requestBody.ProfileName)) {
+      return [UnAuthorizedOperationMessage(requestBody.ProfileName)];
+    }
     if (!getUserObjectIfThereAlready) {
       console.log("Creating new log");
       const newLog = await new logs({
@@ -137,6 +155,11 @@ async function handleWhatsAppMessages(requestBody, response) {
             const clearMongoLog = await logs.findOneAndDelete({
               userName: requestBody.ProfileName,
             });
+
+            //clear session log in mongo
+            const clearMongoSessionLog = await sessionModel.findOneAndDelete({
+              userName: requestBody.ProfileName,
+            });
           }
           question.push(
             "Thank you for choosing kalakaar..! Your Item will be soon reflected on the website."
@@ -181,11 +204,6 @@ async function handleWhatsAppMessages(requestBody, response) {
     }
   }
   return question;
-}
-
-function getHelpMessage(username) {
-  var HelpMessage = `Hi ${username}, Welcome to kalakaar. You can ask me about the following things:\n*/create* - To Create an Item\n*/update <product-id>* - To Update an already exisiting item`;
-  return HelpMessage;
 }
 
 async function updateQuestionStatus(getUserObjectIfThereAlready) {
