@@ -52,3 +52,7 @@ Pictures of the bot:
 Demo video:
 
 [please click here to watch the demo](https://drive.google.com/file/d/1nSuoiog_uaUAoRycibOj8D9NBP1ZM22b/view?usp=sharing)
+
+Project Achievements ✨
+
+This Project won Second runner up position at Amazon Sambhav 2022 Season 2 Hackathon where 26000 teams participated with 57000+ people which also included working professionals and start-ups.
