@@ -5,6 +5,7 @@ async function AuthenticateUser(phoneNumberText) {
   const PhoneNumber = phoneNumberText.split("whatsapp:+91")[1];
 
   //get request to the api to check if the user is already registered
+  console.log(PhoneNumber);
   const response = await axios.get(
     "https://amazon-sambhav-website-server.herokuapp.com/api/checkSellerExists",
     {
@@ -13,8 +14,8 @@ async function AuthenticateUser(phoneNumberText) {
       },
     }
   );
-  console.log("num" + response.data.status);
-  if (response.data.status === "success") {
+  console.log(response);
+  if (response.status === 200) {
     return true;
   } else {
     return false;
