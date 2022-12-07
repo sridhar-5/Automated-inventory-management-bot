@@ -7,7 +7,7 @@ async function AuthenticateUser(phoneNumberText) {
   //get request to the api to check if the user is already registered
   console.log(PhoneNumber);
   const response = await axios.get(
-    "https://amazon-sambhav-website-server.herokuapp.com/api/checkSellerExists",
+    "https://invichat-website-server.azurewebsites.net/api/checkSellerExists",
     {
       params: {
         phone: PhoneNumber,
