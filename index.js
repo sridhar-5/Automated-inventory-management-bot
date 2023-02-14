@@ -56,6 +56,9 @@ app.post("/", async (request, response) => {
     if (findUser.Operation === "create") {
       if (findUser.QuestionStatus === 2) {
         answerObject.productName = request.body.Body;
+        //remove the +91 from the number and store it in the database
+        var number = request.body.From.replace("whatsapp:+91", "");
+        answerObject.Owner = number;
       } else if (findUser.QuestionStatus === 3) {
         answerObject.productDescription = request.body.Body;
       } else if (findUser.QuestionStatus === 4) {
