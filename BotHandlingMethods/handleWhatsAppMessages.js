@@ -139,6 +139,7 @@ async function handleWhatsAppMessages(requestBody, response) {
             NoOfPictures: dataCollectionObject.NoOfPictures,
             productImages: dataCollectionObject.productImages,
             Owner: dataCollectionObject.Owner,
+            productId: Math.floor(Math.random() * 1000000 + 1),
           });
           const pushSuccess = await newProduct.save();
 
