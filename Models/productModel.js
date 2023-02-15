@@ -8,6 +8,7 @@ const product = new mongoose.Schema({
   NoOfPictures: Number,
   productImages: [String],
   Owner: String,
+  productId: Number,
 });
 
 const ProductModel = mongoose.model("products", product);
