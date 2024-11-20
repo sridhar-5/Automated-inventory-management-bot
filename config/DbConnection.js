@@ -4,7 +4,7 @@ dotenv.config();
 
 function connectDatabase() {
   const DatabaseConnection = mongoose.connect(
-    `mongodb+srv://${process.env.USERNAME}:${process.env.PASSWORD}@sihhack.0ea71.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`
+    `mongodb+srv://${process.env.USERNAME}:${process.env.PASSWORD}@cluster0.noion.mongodb.net/?retryWrites=true&w=majority&appName=${process.env.APP_NAME}`
   );
 
   DatabaseConnection.then(() => {

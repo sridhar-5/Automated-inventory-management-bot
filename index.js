@@ -23,7 +23,13 @@ var authToken = process.env.TWILIO_AUTH_TOKEN;
 const client = require("twilio")(accountSid, authToken);
 
 app.use(bodyParser.json());
-app.use(session({ secret: process.env.COOKIE_SECRET }));
+app.use(
+  session({
+    secret: process.env.COOKIE_SECRET,
+    resave: true,
+    saveUninitialized: true,
+  })
+);
 
 dotenv.config();
 
